@@ -1,0 +1,32 @@
+.form-control {
+    --rounded-lg: 12px;
+    --padding: 10px;
+    --prymary-color: #6a5af9;
+
+    max-width: 400px;
+    width: 100%;
+    padding: 50px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    border-radius: 12px;
+    border: 1px solid var(--prymary-color);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    .input-control {
+        padding: var(--padding);
+        border-radius: var(--rounded-lg);
+        border: 1px solid var(--prymary-color);
+    }
+    .err-message-validate {
+        color: #f62682;
+    }
+    .btn-control {
+        padding: var(--padding);
+        border-radius: var(--rounded-lg);
+        color: #fff;
+        background-color: var(--prymary-color);
+    }
+}
