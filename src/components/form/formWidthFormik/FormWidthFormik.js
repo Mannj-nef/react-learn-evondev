@@ -11,9 +11,8 @@ const FormWidthFormik = () => {
         firstName: Yup.string().required("required"),
         lastName: Yup.string().required("required"),
       })}
-      onSubmit={(values, { resetForm }) => {
+      onSubmit={(values) => {
         console.log(values);
-        resetForm();
       }}
     >
       <Form className="form-control">
@@ -25,7 +24,9 @@ const FormWidthFormik = () => {
         <div className="err-message-validate">
           <ErrorMessage name="lastName"></ErrorMessage>
         </div>
-        <button className="btn-control">Submit</button>
+        <button className="btn-control" type="submit">
+          Submit
+        </button>
       </Form>
     </Formik>
   );

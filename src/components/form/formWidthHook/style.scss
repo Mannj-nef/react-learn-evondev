@@ -1,0 +1,60 @@
+.form-control {
+    --prymari-color: #7d6aff;
+    --err-color: #e74c3c;
+    --text-color: #999999;
+    --rounded: 4px;
+    --rounded-lg: 12px;
+
+    max-width: 500px;
+    width: 100%;
+    padding: 50px;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color: #e5e5e5;
+
+    border: 1px solid var(--prymari-color);
+    border-radius: var(--rounded-lg);
+
+    .input-wrapp {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        margin-bottom: 20px;
+        .label-control {
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+        }
+        .input-control {
+            padding: 15px;
+            border-radius: var(--rounded);
+            border: none;
+            outline: none;
+            color: var(--text-color);
+        }
+        .textarea-control {
+            height: 150px;
+            resize: none;
+        }
+        .err-massage {
+            color: var(--err-color);
+            font-weight: 400;
+            font-size: 14px;
+        }
+    }
+    .btn-submit {
+        background-color: var(--prymari-color);
+        color: #fff;
+        padding: 13px;
+        border-radius: var(--rounded);
+        font-weight: 700;
+    }
+    .btn-disabled {
+        opacity: 0.4;
+    }
+}
+
+//Invalid email address

@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.scss";
-import FormWidthFormik from "./components/form/formWidthFormik/FormWidthFormik";
+import FormBaseWidthHook from "./components/form/formWidthHook/FormBaseWidthHook";
 function App() {
   return (
     <div>
-      <FormWidthFormik></FormWidthFormik>
+      <FormBaseWidthHook></FormBaseWidthHook>
     </div>
   );
 }
