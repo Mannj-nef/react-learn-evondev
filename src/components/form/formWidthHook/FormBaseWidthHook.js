@@ -17,17 +17,20 @@ const validateSchema = Yup.object({
 });
 
 const FormBaseWidthHook = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(validateSchema) });
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(validateSchema),
+  });
 
-  console.log(errors);
+  const { errors, isSubmitting } = formState;
 
   const submit = (values) => {
-    console.log(values);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+      }, 2000);
+    });
   };
+  console.log(isSubmitting);
   return (
     <form className="form-control" onSubmit={handleSubmit(submit)}>
       <div className="input-wrapp">
