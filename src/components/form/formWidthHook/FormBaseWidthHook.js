@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import "./style.scss";
+import InputWidthHook from "./InputWidthHook";
+import { useEffect } from "react";
 
 const validateSchema = Yup.object({
   firstName: Yup.string()
@@ -17,59 +19,67 @@ const validateSchema = Yup.object({
 });
 
 const FormBaseWidthHook = () => {
-  const { register, handleSubmit, formState } = useForm({
+  const { handleSubmit, formState, control, setFocus, reset } = useForm({
     resolver: yupResolver(validateSchema),
   });
 
-  const { errors, isSubmitting } = formState;
+  const { errors, isSubmitting, isValid } = formState;
+
+  useEffect(() => {
+    setFocus("firstName");
+  }, [setFocus]);
 
   const submit = (values) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 2000);
-    });
+    if (isValid)
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+          console.log("submit", values);
+          reset();
+        }, 2000);
+      });
   };
-  console.log(isSubmitting);
   return (
-    <form className="form-control" onSubmit={handleSubmit(submit)}>
+    <form
+      className="form-control"
+      onSubmit={handleSubmit(submit)}
+      autoComplete="off"
+    >
       <div className="input-wrapp">
-        <label htmlFor="firstName">First Name</label>
-        <input
-          type="text"
-          className="input-control"
-          placeholder="Enter your first name"
-          {...register("firstName")}
-        />
-        {errors?.firstName?.message && (
-          <p className="err-massage">{errors.firstName.message}</p>
-        )}
+        <InputWidthHook
+          lable="First Name"
+          name="firstName"
+          id="firstName"
+          control={control}
+          placeholder="Enter you first Name"
+          errors={errors?.firstName}
+        ></InputWidthHook>
+
+        <InputWidthHook
+          lable="Last Name"
+          name="lastName"
+          id="lastName"
+          control={control}
+          placeholder="Enter you last Name"
+          errors={errors?.lastName}
+        ></InputWidthHook>
+
+        <InputWidthHook
+          lable="Email Address"
+          name="email"
+          id="email"
+          control={control}
+          placeholder="Enter you email address"
+          errors={errors?.email}
+        ></InputWidthHook>
       </div>
-      <div className="input-wrapp">
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          type="text"
-          className="input-control"
-          placeholder="Enter your last name"
-          {...register("lastName")}
-        />
-        {errors?.lastName?.message && (
-          <p className="err-massage">{errors.lastName.message}</p>
+      <button className="btn-submit">
+        {isSubmitting ? (
+          <div className="w-5 h-5 border boorder-[2px] border-white border-t-transparent rounded-full animate-spin m-auto"></div>
+        ) : (
+          "Submit"
         )}
-      </div>
-      <div className="input-wrapp">
-        <label htmlFor="email">Email Address</label>
-        <input
-          type="text"
-          className="input-control"
-          placeholder="Enter your Email Address"
-          {...register("email")}
-        />
-        {errors?.email?.message && (
-          <p className="err-massage">{errors.email.message}</p>
-        )}
-      </div>
-      <button className="btn-submit">Submit</button>
+      </button>
     </form>
   );
 };
